@@ -11,9 +11,20 @@ import '@/styles/base.css'
 import '@/styles/iconfont.css'
 // 全局button组件
 import HmButton from 'components/hm-button.vue'
-Vue.component('HmButton', HmButton)
 
+// 引入vant Toast轻提示
+import { Toast, Checkbox, CheckboxGroup } from 'vant'
+Vue.use(Toast)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+
+Vue.component('HmButton', HmButton)
+// axios优化一：将axios 绑定到原型上，vue组件就是可服用的vue实例，可以访问到原型上的方法
+//    用法:this.$http.xxx(...)
 Vue.prototype.$http = axios
+// axios优化二：配置好基准路径，将来axios请求时，会自动拼上前缀
+axios.defaults.baseURL = 'http://localhost:3000'
+
 Vue.config.productionTip = false
 
 new Vue({

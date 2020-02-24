@@ -1,6 +1,6 @@
 <template>
   <div class="center">
-    <div><img src="{{}}" alt=""></div>
+    这是个人中心
   </div>
 </template>
 
