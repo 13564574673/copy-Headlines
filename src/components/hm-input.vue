@@ -31,7 +31,6 @@ export default {
     errMsg: {
       type: String
     }
-
   },
   methods: {
     handlInput (event) {
