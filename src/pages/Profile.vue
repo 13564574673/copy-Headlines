@@ -20,15 +20,15 @@
       </div>
       <!-- 右箭头 -->
       <div class="icon">
-        <i class="iconfont iconjiantou1" @click="fn"></i>
+        <i class="iconfont iconjiantou1" @click="$router.push('/edit-profile')"></i>
       </div>
     </div>
     <!-- 底部列表 -->
     <div class="list">
-      <hm-nav name="我的关注" info="关注的用户" @click="fn1"></hm-nav>
-      <hm-nav name="我的跟帖" info="跟帖/回复" @click="fn1"></hm-nav>
-      <hm-nav name="我的收藏" info="文字/视频" @click="fn1"></hm-nav>
-      <hm-nav name="设置" @click="fn"></hm-nav>
+      <hm-nav name="我的关注" info="关注的用户" @click="$router.push('/follow')"></hm-nav>
+      <hm-nav name="我的跟帖" info="跟帖/回复"></hm-nav>
+      <hm-nav name="我的收藏" info="文字/视频" ></hm-nav>
+      <hm-nav name="设置" @click="$router.push('/edit-profile')"></hm-nav>
     </div>
     <!-- 退出按钮 -->
     <div class="logout-btn">
@@ -85,14 +85,6 @@ export default {
       } catch (e) {
         console.log(e)
       }
-    },
-    fn () {
-      // console.log(111)
-      // console.log(this.$route)
-      this.$router.push('/edit-profile')
-    },
-    fn1 () {
-      console.log('111')
     }
   }
 }

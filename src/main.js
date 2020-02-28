@@ -53,7 +53,6 @@ axios.interceptors.request.use(function (config) {
   // 对请求错误做些什么
   return Promise.reject(error)
 })
-
 // 添加响应拦截器：在响应正在被处理之前，都会先经过响应拦截器
 axios.interceptors.response.use(function (response) {
   // 对响应数据做点什么，这里可以写一些对响应的统一处理
@@ -78,8 +77,8 @@ axios.interceptors.response.use(function (response) {
 })
 // ----------------------------------------------------
 // 定义全局 时间处理过滤器(moment)
-Vue.filter('time', function (value) {
-  return moment(value).format('YYYY-MM-DD')
+Vue.filter('time', function (value, time = 'YYYY-MM-DD') {
+  return moment(value).format(time)
 })
 Vue.config.productionTip = false
 
