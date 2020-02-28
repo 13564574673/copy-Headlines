@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Login from '@/pages/Login.vue'
 import Register from 'pages/Register.vue'
 import Profile from 'pages/Profile.vue'
+import EditProfile from 'pages/EditProfile.vue'
+import Test2 from 'pages/Test2.vue'
 
 Vue.use(VueRouter)
 
@@ -11,7 +13,9 @@ const router = new VueRouter({
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login, name: 'login' },
     { path: '/register', component: Register, name: 'register' },
-    { path: '/profile', component: Profile, name: 'profile' }
+    { path: '/profile', component: Profile, name: 'profile' },
+    { path: '/edit-profile', component: EditProfile, name: 'edit-profile' },
+    { path: '/test2', component: Test2, name: 'test2' }
   ]
 })
 // 全局前置守卫：所有的路由在被真正访问之前，都会经过全局前置守卫
@@ -23,7 +27,7 @@ const router = new VueRouter({
 // 1.需要授权才能访问 个人中心页，我的收藏，我的关注...
 // 2.不需要授权，可以直接访问的 首页 登录页 注册页
 // 添加一个数组，专门存放所有需要授权的路径
-const AuthUrls = ['/profile']
+const AuthUrls = ['/profile', '/edit-profile']
 router.beforeEach((to, from, next) => {
   if (AuthUrls.includes(to.path)) {
     // 需要授权访问的路径，判断有没有token令牌

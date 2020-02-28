@@ -20,14 +20,14 @@
       </div>
       <!-- 右箭头 -->
       <div class="icon">
-        <i class="iconfont iconjiantou1"></i>
+        <i class="iconfont iconjiantou1" @click="fn"></i>
       </div>
     </div>
     <!-- 底部列表 -->
     <div class="list">
-      <hm-nav name="我的关注" info="关注的用户" @click="fn"></hm-nav>
-      <hm-nav name="我的跟帖" info="跟帖/回复" @click="fn"></hm-nav>
-      <hm-nav name="我的收藏" info="文字/视频" @click="fn"></hm-nav>
+      <hm-nav name="我的关注" info="关注的用户" @click="fn1"></hm-nav>
+      <hm-nav name="我的跟帖" info="跟帖/回复" @click="fn1"></hm-nav>
+      <hm-nav name="我的收藏" info="文字/视频" @click="fn1"></hm-nav>
       <hm-nav name="设置" @click="fn"></hm-nav>
     </div>
     <!-- 退出按钮 -->
@@ -47,21 +47,15 @@ export default {
   async created () {
     // 从本读取出需要的id 和 token
     const userId = localStorage.getItem('user-id')
-    const token = localStorage.getItem('token')
     // 发送请求获取到个人信息的数据,需要携带tonken令牌
     // 只要是需要权限认证的，都需要带上令牌(如何携带令牌，有规范的 => 放在请求头Authorization字段中)
-    const res = await this.$http.get(`/user/${userId}`, {
-      // 配置请求时的请求头
-      headers: {
-        Authorization: token
-      }
-    })
+    const res = await this.$http.get(`/user/${userId}`)
     // console.log(res)
     // 判断响应,请求成功往profile空对象中进行存储
     const { statusCode, data } = res.data
     if (statusCode === 200) {
       this.profile = data
-      console.log(this.profile)
+      // console.log(this.profile)
     }
     // if (statusCode === 401 && res.data.message === '用户信息验证失败') {
     //   // 说明用户的token已失效，需要拦截到登录页
@@ -93,8 +87,12 @@ export default {
       }
     },
     fn () {
-      console.log(111)
+      // console.log(111)
       // console.log(this.$route)
+      this.$router.push('/edit-profile')
+    },
+    fn1 () {
+      console.log('111')
     }
   }
 }

@@ -12,28 +12,42 @@ import '@/styles/iconfont.css'
 // 全局button组件
 import HmButton from 'components/hm-button.vue'
 import HmNav from 'components/hm-nav.vue'
+import HmHeader from 'components/hm-header.vue'
 
 // 引入vant Toast轻提示
-import { Toast, Checkbox, CheckboxGroup, Button, Dialog } from 'vant'
+import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader } from 'vant'
 Vue.use(Toast)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
 Vue.use(Button)
 Vue.use(Dialog)
+Vue.use(Field)
+Vue.use(Icon)
+Vue.use(RadioGroup)
+Vue.use(Radio)
+Vue.use(Uploader)
 
 // 将组件注册成全局组件
 Vue.component('HmButton', HmButton)
 Vue.component('HmNav', HmNav)
+Vue.component('HmHeader', HmHeader)
 
 // axios优化一：将axios 绑定到原型上，vue组件就是可服用的vue实例，可以访问到原型上的方法
 //    用法:this.$http.xxx(...)
 Vue.prototype.$http = axios
 // axios优化二：配置好基准路径，将来axios请求时，会自动拼上前缀
-axios.defaults.baseURL = 'http://localhost:3000'
+// axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://192.168.1.12:3000'
 // axios优化三：配置拦截器，进行统一拦截token失效的用户
+
 // 添加请求拦截器：在请求真正发送出去之前，都会经过请求拦截器
 axios.interceptors.request.use(function (config) {
-  // 在发送请求之前做些什么
+  // 设置全局的 Authorization token验证
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = token
+  }
+  // console.log(config)
   return config
 }, function (error) {
   // 对请求错误做些什么
