@@ -15,7 +15,7 @@ import HmNav from 'components/hm-nav.vue'
 import HmHeader from 'components/hm-header.vue'
 
 // 引入vant Toast轻提示
-import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader } from 'vant'
+import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader, List } from 'vant'
 Vue.use(Toast)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
@@ -26,6 +26,7 @@ Vue.use(Icon)
 Vue.use(RadioGroup)
 Vue.use(Radio)
 Vue.use(Uploader)
+Vue.use(List)
 
 // 将组件注册成全局组件
 Vue.component('HmButton', HmButton)
@@ -77,8 +78,8 @@ axios.interceptors.response.use(function (response) {
 })
 // ----------------------------------------------------
 // 定义全局 时间处理过滤器(moment)
-Vue.filter('time', function (value, time = 'YYYY-MM-DD') {
-  return moment(value).format(time)
+Vue.filter('time', function (value, str = 'YYYY-MM-DD') {
+  return moment(value).format(str)
 })
 Vue.config.productionTip = false
 

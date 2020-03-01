@@ -5,6 +5,7 @@ import Register from 'pages/Register.vue'
 import Profile from 'pages/Profile.vue'
 import EditProfile from 'pages/EditProfile.vue'
 import Follow from 'pages/Follow.vue'
+import MyComments from 'pages/MyComments.vue'
 import Test2 from 'pages/Test2.vue'
 
 Vue.use(VueRouter)
@@ -17,6 +18,7 @@ const router = new VueRouter({
     { path: '/profile', component: Profile, name: 'profile' },
     { path: '/edit-profile', component: EditProfile, name: 'edit-profile' },
     { path: '/follow', component: Follow, name: 'follow' },
+    { path: '/my-comments', component: MyComments, name: 'my-comments' },
     { path: '/test2', component: Test2, name: 'test2' }
   ]
 })
@@ -32,7 +34,8 @@ const router = new VueRouter({
 const AuthUrls = [
   '/profile',
   '/edit-profile',
-  '/follow'
+  '/follow',
+  '/my-comments'
 ]
 router.beforeEach((to, from, next) => {
   if (AuthUrls.includes(to.path)) {

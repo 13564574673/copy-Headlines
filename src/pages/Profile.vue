@@ -26,7 +26,7 @@
     <!-- 底部列表 -->
     <div class="list">
       <hm-nav name="我的关注" info="关注的用户" @click="$router.push('/follow')"></hm-nav>
-      <hm-nav name="我的跟帖" info="跟帖/回复"></hm-nav>
+      <hm-nav name="我的跟帖" info="跟帖/回复" @click="$router.push('/my-comments')"></hm-nav>
       <hm-nav name="我的收藏" info="文字/视频" ></hm-nav>
       <hm-nav name="设置" @click="$router.push('/edit-profile')"></hm-nav>
     </div>
