@@ -15,7 +15,7 @@ import HmNav from 'components/hm-nav.vue'
 import HmHeader from 'components/hm-header.vue'
 
 // 引入vant Toast轻提示
-import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader, List } from 'vant'
+import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader, List, Tab, Tabs } from 'vant'
 Vue.use(Toast)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
@@ -27,6 +27,8 @@ Vue.use(RadioGroup)
 Vue.use(Radio)
 Vue.use(Uploader)
 Vue.use(List)
+Vue.use(Tab)
+Vue.use(Tabs)
 
 // 将组件注册成全局组件
 Vue.component('HmButton', HmButton)

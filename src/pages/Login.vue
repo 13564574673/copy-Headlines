@@ -121,7 +121,7 @@ export default {
           // checked的状态为false，清除本地存储的数据
           localStorage.removeItem('hm-Ttname')
         }
-        this.$router.push('/profile')
+        this.$router.push('/')
       } else {
         console.log('登录失败！')
         this.$toast.fail('用户名或者密码错误')

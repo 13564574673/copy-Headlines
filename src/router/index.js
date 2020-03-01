@@ -1,24 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from 'pages/Home.vue'
 import Login from '@/pages/Login.vue'
 import Register from 'pages/Register.vue'
 import Profile from 'pages/Profile.vue'
 import EditProfile from 'pages/EditProfile.vue'
 import Follow from 'pages/Follow.vue'
 import MyComments from 'pages/MyComments.vue'
+import MyFavorite from 'pages/MyFavorite.vue'
 import Test2 from 'pages/Test2.vue'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [
-    { path: '/', redirect: '/login' },
+    { path: '/home', redirect: '/' },
+    { path: '/', component: Home, name: 'home' },
     { path: '/login', component: Login, name: 'login' },
     { path: '/register', component: Register, name: 'register' },
     { path: '/profile', component: Profile, name: 'profile' },
     { path: '/edit-profile', component: EditProfile, name: 'edit-profile' },
     { path: '/follow', component: Follow, name: 'follow' },
     { path: '/my-comments', component: MyComments, name: 'my-comments' },
+    { path: '/my-favorite', component: MyFavorite, name: 'my-favorite' },
     { path: '/test2', component: Test2, name: 'test2' }
   ]
 })
@@ -35,7 +39,8 @@ const AuthUrls = [
   '/profile',
   '/edit-profile',
   '/follow',
-  '/my-comments'
+  '/my-comments',
+  '/my-favorite'
 ]
 router.beforeEach((to, from, next) => {
   if (AuthUrls.includes(to.path)) {
@@ -46,7 +51,8 @@ router.beforeEach((to, from, next) => {
     if (token) {
       next()
     } else {
-      next('/login')
+      // next('/login')
+      router.push('/login')
     }
   } else {
     // 不需要授权访问的路径，放行
