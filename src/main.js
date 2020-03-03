@@ -13,9 +13,10 @@ import '@/styles/iconfont.css'
 import HmButton from 'components/hm-button.vue'
 import HmNav from 'components/hm-nav.vue'
 import HmHeader from 'components/hm-header.vue'
+import HmPost from 'components/hm-post.vue'
 
 // 引入vant Toast轻提示
-import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader, List, Tab, Tabs } from 'vant'
+import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader, List, Tab, Tabs, PullRefresh } from 'vant'
 Vue.use(Toast)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
@@ -29,11 +30,13 @@ Vue.use(Uploader)
 Vue.use(List)
 Vue.use(Tab)
 Vue.use(Tabs)
+Vue.use(PullRefresh)
 
 // 将组件注册成全局组件
 Vue.component('HmButton', HmButton)
 Vue.component('HmNav', HmNav)
 Vue.component('HmHeader', HmHeader)
+Vue.component('HmPost', HmPost)
 
 // axios优化一：将axios 绑定到原型上，vue组件就是可服用的vue实例，可以访问到原型上的方法
 //    用法:this.$http.xxx(...)

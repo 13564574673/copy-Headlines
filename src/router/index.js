@@ -8,6 +8,7 @@ import EditProfile from 'pages/EditProfile.vue'
 import Follow from 'pages/Follow.vue'
 import MyComments from 'pages/MyComments.vue'
 import MyFavorite from 'pages/MyFavorite.vue'
+import PostDetail from 'pages/PostDetail.vue'
 import Test2 from 'pages/Test2.vue'
 
 Vue.use(VueRouter)
@@ -23,6 +24,7 @@ const router = new VueRouter({
     { path: '/follow', component: Follow, name: 'follow' },
     { path: '/my-comments', component: MyComments, name: 'my-comments' },
     { path: '/my-favorite', component: MyFavorite, name: 'my-favorite' },
+    { path: '/post-detail', component: PostDetail, name: 'post-detail' },
     { path: '/test2', component: Test2, name: 'test2' }
   ]
 })
