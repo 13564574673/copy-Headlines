@@ -2,7 +2,7 @@
   <div class="post-detail">
     <!-- 头部 -->
     <div class="header" >
-      <div class="left" @click="$router.push('/')">
+      <div class="left" @click="$router.go(-1)">
         <i class="iconfont iconjiantou2"></i>
         <i class="iconfont iconnew"></i>
       </div>

@@ -20,8 +20,8 @@
           </div>
           <div class="content">{{item.content}}</div>
           <div class="orgin" >
-            <p class="one-txt-cut">原文：{{item.post.title}}</p>
-            <i class="iconfont iconjiantou1"></i>
+            <p class="one-txt-cut" @click="$router.push(`/post-detail/${item.post.id}`)">原文：{{item.post.title}}</p>
+            <i class="iconfont iconjiantou1" @click="$router.push(`/post-detail/${item.post.id}`)"></i>
           </div>
         </div>
       </van-list>

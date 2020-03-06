@@ -106,7 +106,7 @@ Vue.filter('time1', value => {
   if (hour >= 24) {
     return '1天前'
   } else {
-    return hour + '时前'
+    return hour + '小时前'
   }
 })
 

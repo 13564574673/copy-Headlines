@@ -1,7 +1,7 @@
 <template>
   <div class="my-favorite">
     <hm-header>我的收藏</hm-header>
-    <hm-post v-for="post in list" :key="post.id" :post="post"></hm-post>
+    <hm-post @click="$router.push(`/post-detail/${post.id}`)" v-for="post in list" :key="post.id" :post="post"></hm-post>
     <!-- <div class="item" v-for="item in list" :key="item.id">
       <div class="info">
         <div class="title txt-cut">{{item.title}}</div>
