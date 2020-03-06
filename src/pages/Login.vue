@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="close">
+    <div class="close" @click="$router.push('/')">
       <i class="iconfont iconicon-test"></i>
     </div>
     <div class="logo">

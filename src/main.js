@@ -14,6 +14,7 @@ import HmButton from 'components/hm-button.vue'
 import HmNav from 'components/hm-nav.vue'
 import HmHeader from 'components/hm-header.vue'
 import HmPost from 'components/hm-post.vue'
+import HmComment from 'components/hm-comment.vue'
 
 // 引入vant Toast轻提示
 import { Toast, Checkbox, CheckboxGroup, Button, Dialog, Field, Icon, RadioGroup, Radio, Uploader, List, Tab, Tabs, PullRefresh } from 'vant'
@@ -37,7 +38,7 @@ Vue.component('HmButton', HmButton)
 Vue.component('HmNav', HmNav)
 Vue.component('HmHeader', HmHeader)
 Vue.component('HmPost', HmPost)
-
+Vue.component('HmComment', HmComment)
 // axios优化一：将axios 绑定到原型上，vue组件就是可服用的vue实例，可以访问到原型上的方法
 //    用法:this.$http.xxx(...)
 Vue.prototype.$http = axios
@@ -86,6 +87,29 @@ axios.interceptors.response.use(function (response) {
 Vue.filter('time', function (value, str = 'YYYY-MM-DD') {
   return moment(value).format(str)
 })
+// 定义全局 后台请求地址过滤器(moment)
+Vue.filter('fixUrl', function (value) {
+  return axios.defaults.baseURL + value
+})
+// 定义全局 焦点处理自定义指令 v-focus
+Vue.directive('focus', {
+  // 元素节点被插入到dom中时执行
+  inserted (el) {
+    el.focus()
+  }
+})
+// 定义全局 评论时间处理
+Vue.filter('time1', value => {
+  // 小时
+  const hour = parseInt((Date.now() - Date.parse(value)) / 1000 / 3600)
+
+  if (hour >= 24) {
+    return '1天前'
+  } else {
+    return hour + '时前'
+  }
+})
+
 Vue.config.productionTip = false
 
 new Vue({

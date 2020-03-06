@@ -5,7 +5,7 @@
       <div class="logo">
         <i class="iconfont iconnew"></i>
       </div>
-      <div class="search">
+      <div class="search" @click="$router.push('/search')">
         <i class="iconfont iconsearch"></i>
         <span>搜索新闻</span>
       </div>
@@ -25,25 +25,29 @@
 
          每个tab，应该有自己的一个loading 和 finished
      -->
-    <!-- 栏目 -->
-    <van-tabs v-model="active" sticky background="#e4e4e4">
-      <van-tab :title="item.name" v-for="item in tabList" :key="item.id">
-        <!-- 下拉刷新 -->
-        <van-pull-refresh :success-duration="500" :animation-duration="500" success-text="最新数据获取成功" v-model="item.refreshing" @refresh="onRefresh">
-          <!-- 需要用van-list将文章列表包裹 -->
-          <van-list
-            :offset="50"
-            :immediate-check="false"
-            v-model="item.loading"
-            :finished="item.finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-            <hm-post v-for="post in item.posts" :key="post.id" :post="post"></hm-post>
-          </van-list>
-        </van-pull-refresh>
-      </van-tab>
-    </van-tabs>
+    <div class="tab-box">
+      <!-- 右侧图标 -->
+      <van-icon @click="$router.push('/tab-manage')" name="arrow-down" />
+      <!-- 栏目 -->
+      <van-tabs v-model="active" sticky background="#e4e4e4" swipeable>
+        <van-tab :title="item.name" v-for="item in tabList" :key="item.id">
+          <!-- 下拉刷新 -->
+          <van-pull-refresh :success-duration="500" :animation-duration="500" success-text="最新数据获取成功" v-model="item.refreshing" @refresh="onRefresh">
+            <!-- 需要用van-list将文章列表包裹 -->
+            <van-list
+              :offset="40"
+              :immediate-check="false"
+              v-model="item.loading"
+              :finished="item.finished"
+              finished-text="没有更多了"
+              @load="onLoad"
+            >
+              <hm-post v-for="post in item.posts" :key="post.id" :post="post" @click="$router.push(`/post-detail/${post.id}`)"></hm-post>
+            </van-list>
+          </van-pull-refresh>
+        </van-tab>
+      </van-tabs>
+    </div>
   </div>
 </template>
 
@@ -57,7 +61,25 @@ export default {
     }
   },
   async created () {
-    await this.getTabList()
+    // 优先从缓存中读取 tabList
+    const activeTabs = JSON.parse(localStorage.getItem('activeTabs'))
+    if (activeTabs) {
+      activeTabs.forEach(item => {
+        // 当前tab栏已经加载的文章的数据
+        item.posts = []
+        // 当前tab栏的当前页，每个tab栏都有自己的当前页
+        item.pageIndex = 1
+        // 每个tab栏，要有自己的 finished 和 loading
+        item.finished = false
+        item.loading = false
+        item.refreshing = false
+      })
+      this.tabList = activeTabs
+    } else {
+      // 一进入页面就要发送ajax请求, 进行tab栏的数据获取和渲染
+      await this.getTabList()
+    }
+    // 一进入页面, 等tabList回来, 根据this.active 渲染文章
     this.getPostList()
   },
   methods: {
@@ -177,6 +199,27 @@ export default {
       width: 70px;
 
     }
+  }
+  .tab-box{
+    .van-icon{
+      position: sticky;
+      top: 0;
+      float: right;
+      width: 44px;
+      height: 44px;
+      z-index: 999;
+      background-color:rgb(228, 228, 228);
+      line-height: 44px;
+      text-align: center;
+      font-size: 18px;
+    }
+  }
+}
+</style>
+<style lang="scss">
+.home{
+  .van-sticky{
+    padding-right: 44px;
   }
 }
 </style>

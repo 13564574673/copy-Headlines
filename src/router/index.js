@@ -9,7 +9,11 @@ import Follow from 'pages/Follow.vue'
 import MyComments from 'pages/MyComments.vue'
 import MyFavorite from 'pages/MyFavorite.vue'
 import PostDetail from 'pages/PostDetail.vue'
+import TabManage from 'pages/TabManage.vue'
+import Search from 'pages/Search.vue'
 import Test2 from 'pages/Test2.vue'
+import { Toast } from 'vant'
+Vue.use(Toast)
 
 Vue.use(VueRouter)
 
@@ -24,7 +28,9 @@ const router = new VueRouter({
     { path: '/follow', component: Follow, name: 'follow' },
     { path: '/my-comments', component: MyComments, name: 'my-comments' },
     { path: '/my-favorite', component: MyFavorite, name: 'my-favorite' },
-    { path: '/post-detail', component: PostDetail, name: 'post-detail' },
+    { path: '/post-detail/:id', component: PostDetail, name: 'post-detail' },
+    { path: '/tab-manage', component: TabManage, name: '/tab-manage' },
+    { path: '/search', component: Search, name: '/search' },
     { path: '/test2', component: Test2, name: 'test2' }
   ]
 })
@@ -42,7 +48,8 @@ const AuthUrls = [
   '/edit-profile',
   '/follow',
   '/my-comments',
-  '/my-favorite'
+  '/my-favorite',
+  '/tab-manage'
 ]
 router.beforeEach((to, from, next) => {
   if (AuthUrls.includes(to.path)) {
@@ -54,6 +61,7 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       // next('/login')
+      Toast('未登录，请先登录！')
       router.push('/login')
     }
   } else {
